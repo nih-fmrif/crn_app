@@ -59,8 +59,6 @@ let FrontPage = React.createClass({
                         </div>
                     </div>
                 </div>
-                <FrontPageTabs />
-                <Pipelines />
                 {this._moreInfo()}
                 <Footer />
             </span>
