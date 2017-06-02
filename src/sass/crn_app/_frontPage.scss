@@ -485,6 +485,17 @@ footer {
     padding: 10px 20px;
     color: $white;
     display: block;
+
+    a,
+    a:visited {
+        color: $white;
+    }
+    a:hover,
+    a:focus {
+        color: $white;
+        text-decoration: underline;
+    }
+
     .version{
 
     }
