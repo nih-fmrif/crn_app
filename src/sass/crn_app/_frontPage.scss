@@ -514,3 +514,26 @@ footer {
 
 
 
+.support-more-row {
+    font-size: 0.1px;
+    text-align: center;
+
+    .support-more-col {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+@supports (display: flex) {
+    .support-more-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        font-size: inherit;
+        text-align: inherit;
+
+        .support-more-col {
+            display: block;
+            margin: auto;
+        }
+    }
+}

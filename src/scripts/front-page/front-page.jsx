@@ -129,32 +129,25 @@ let FrontPage = React.createClass({
 */}
                     <div className="support-more">
                             <h4 className="sr-only">Support for NIDO provided by</h4>
-                            <div className="row">
-                                <div className="col-sm-4">
-                                    <a target="_blank" href="http://www.arnoldfoundation.org/" title="Arnold Foundation">
-                                        <img src="./assets/ljaf.png" alt="Arnold Foundation"/>
+                            <div className="support-more-row">
+                                <div className="support-more-col">
+                                    <a target="_blank" href="https://cmn.nimh.nih.gov/" title="Data Science and Sharing Team">
+                                        <img src="./assets/data-science-and-sharing-team.png" alt="Data Science and Sharing Team"/>
                                     </a>
                                 </div>
-                                <div className="col-sm-4">
-                                    <a target="_blank" href="https://www.nsf.gov/" title="NSF">
-                                        <img src="./assets/nsf.png" alt="National Science Foundation"/>
+                                <div className="support-more-col">
+                                    <a target="_blank" href="https://www.fmrif.nimh.nih.gov/" title="FMRIF">
+                                        <img src="./assets/fmrif.png" alt="Functional Magnetic Resonance Facility"/>
                                     </a>
                                 </div>
-                                <div className="col-sm-4">
-                                    <a target="_blank" href="https://www.nih.gov/" title="NIH">
-                                        <img src="./assets/nih.png" alt="National Institute on Drug and Abuse"/>
+                                <div className="support-more-col">
+                                    <a target="_blank" href="https://www.nimh.nih.gov/labs-at-nimh/index.shtml" title="NIH">
+                                        <img src="./assets/nih-nimh.png" alt="National Institute of Mental Health"/>
                                     </a>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-offset-3 col-sm-3">
-                                    <a target="_blank" href="https://www.stanford.edu/" title="Stanford">
-                                        <img src="./assets/stanford.png" alt="Stanford"/>
-                                    </a>
-                                </div>
-                                <div className="col-sm-3">
-                                    <a target="_blank" href="https://squishymedia.com/" title="Squishymedia">
-                                        <img src="./assets/squishymedia.png" alt="Squishymedia"/>
+                                <div className="support-more-col">
+                                    <a target="_blank" href="https://www.hhs.gov/" title="HHS">
+                                        <img src="./assets/dhhs.png" alt="Department of Health and Human Services"/>
                                     </a>
                                 </div>
                             </div>
