@@ -17,6 +17,7 @@ let Footer = React.createClass({
                     <div className="col-xs-12 col-md-4 version">
                         <span>OpenNeuro Beta v.{packageJson.version}</span>
                     </div>
+{/*
                     <div className="col-xs-12 col-md-4 footer-menu">
                         <ul>
                             <li>About</li>
@@ -27,6 +28,7 @@ let Footer = React.createClass({
                     <div className="col-xs-12 col-md-4 copy">
                         <span>&copy; 2016 Stanford Center for Reproducible Neuroscience</span>
                     </div>
+*/}
                 </div>
             </footer>
             </span>
