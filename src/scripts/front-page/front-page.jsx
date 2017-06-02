@@ -42,13 +42,14 @@ let FrontPage = React.createClass({
                     <div className="container">
                         <div className="intro-inner fade-in clearfix">
                             <div className="clearfix welcome-block">
+                                <img src="./assets/nido.png" alt="NIMH Intraural Data-sharing with OpenNeuro" />
+{/*
                                 <div className="logo-layers">
                                     <img className="logo-layer-users" src="./assets/logo_users.png" alt="OpenNeuro Logo" />
                                     <img className="logo-layer-cube" src="./assets/logo_cube.png" alt="OpenNeuro Logo" />
                                     <img className="logo-layer-app" src="./assets/logo_app.png" alt="OpenNeuro Logo" />
                                     <img className="logo-layer-data" src="./assets/logo_data.png" alt="OpenNeuro Logo" />
                                 </div>
-{/*
                                 <div className="logo-text">Open<span className="logo-end">Neuro</span></div>
 */}
                                 <h1>NIMH Intraural Data-sharing with OpenNeuro</h1>
