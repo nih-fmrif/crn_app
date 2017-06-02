@@ -37,6 +37,7 @@
     z-index: 1300;
     .container{
         padding: 0;
+        border-top: 1px solid #babfc3;
         .navbar-collapse{
             padding: 0;
         }
@@ -120,6 +121,7 @@
 
             .sign-in-nav-btn {
                 margin: 15px 20px;
+                border: 1px solid $white;
                 @media(max-width: 767px){
                     margin: 0;
                 }
