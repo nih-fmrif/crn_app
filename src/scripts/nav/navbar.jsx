@@ -43,10 +43,12 @@ let BSNavbar = React.createClass({
     _brand(){
         return(
             <Link to="app" className="navbar-brand">
+{/*
                 <img src="./assets/brand_mark.png"
                      alt="OpenNeuro Logo"
                      title="OpenNeuro Link To Home Page"/>
-                     <div className="logo-text">Open<span className="logo-end">Neuro</span></div>
+*/}
+                     <div className="logo-text">NIDO</div>
             </Link>
         );
     },

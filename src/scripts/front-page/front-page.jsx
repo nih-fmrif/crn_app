@@ -48,8 +48,10 @@ let FrontPage = React.createClass({
                                     <img className="logo-layer-app" src="./assets/logo_app.png" alt="OpenNeuro Logo" />
                                     <img className="logo-layer-data" src="./assets/logo_data.png" alt="OpenNeuro Logo" />
                                 </div>
+{/*
                                 <div className="logo-text">Open<span className="logo-end">Neuro</span></div>
-                                <h1>A free and open platform for analyzing and sharing neuroimaging data</h1>
+*/}
+                                <h1>NIMH Intraural Data-sharing with OpenNeuro</h1>
                                 <div className="sign-in-block fade-in">
                                     {this._error(this.state.signinError, this.state.loading)}
                                     {this._signinForm(this.state.loading)}
@@ -126,7 +128,7 @@ let FrontPage = React.createClass({
                     </span>
 */}
                     <div className="support-more">
-                            <h4>Support for OpenNeuro provided by</h4>
+                            <h4 className="sr-only">Support for NIDO provided by</h4>
                             <div className="row">
                                 <div className="col-sm-4">
                                     <a target="_blank" href="http://www.arnoldfoundation.org/" title="Arnold Foundation">
