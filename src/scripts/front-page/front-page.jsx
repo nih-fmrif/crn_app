@@ -10,6 +10,9 @@ import Footer        from '../common/partials/footer.jsx';
 import Pipelines     from './front-page.pipelines.jsx';
 import FPActions     from './front-page.actions.js';
 
+//silence lint errors while allowing somewhat simpler merges with upstream
+var _ = FrontPageTabs;
+var _ = Pipelines;
 
 // component setup ----------------------------------------------------
 
@@ -91,6 +94,7 @@ let FrontPage = React.createClass({
         return (
             <div className="more-info">
                 <div className="container">
+{/*
                     <span className="openneuro-more">
                         <div className="col-xs-12">
                             <div className="logo-text">Open<span className="logo-end">Neuro</span></div>
@@ -120,6 +124,7 @@ let FrontPage = React.createClass({
                             </div>
                         </div>
                     </span>
+*/}
                     <div className="support-more">
                             <h4>Support for OpenNeuro provided by</h4>
                             <div className="row">
