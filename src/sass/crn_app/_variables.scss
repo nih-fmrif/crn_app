@@ -1,4 +1,7 @@
 // Colors
+
+$nido-blue: #246c9e;
+
 $transparent: rgba(0, 0, 0, 0);
 $transparent1: rgba(0, 0, 0, .1);
 $transparent3: rgba(0, 0, 0, .3);
@@ -12,20 +15,20 @@ $transparent05-w: rgba(255, 255, 255, .05);
 
 $white: #fff;
 $black: #000;
-$stanford-red: #8c1515; //link color
+$stanford-red: $nido-blue; //link color
 $coral:#eb472c;
 $salmon:#ec7764;
 
 $rock:#5f574f;
 $stone:#928b81;
 $driftwood:#b6b1a9;
-$misty:#dad7cb;
+$misty:#fff;
 
 $fuchsia: #9169a7;
 
-$ocean:#00505c;
+$ocean:$nido-blue;
 $algae:#175e54;
-$sky:#007c92;
+$sky:$nido-blue;
 $turquoise:#009b76;
 $night:#012a30; //body font color
 
@@ -51,7 +54,7 @@ $c-77: #777;
 $c-66: #666;
 $c-56: #565656;
 $c-42: #424242;
-$c-33: #333;
+$c-33: #75767a;
 $c-21: #212121;
 
 $aaa: #aaa;

@@ -19,6 +19,7 @@
         display: block;
         width: 100%;
         background-color: #fff;
+        border-bottom: 2px solid #d8d8d8;
     }
 }
 
@@ -275,7 +276,7 @@
 .more-info {
     margin: 0;
     padding: 70px 0;
-    @include gradient-vertical($start-color: $e7, $end-color: $white, $start-percent: 0%, $end-percent: 30%);
+    background-color: $white;
     .container{
         max-width: 1500px;
         .bids-more,
@@ -480,7 +481,7 @@
 }
 
 footer {
-    background: #333;
+    background: $c-33;
     padding: 10px 20px;
     color: $white;
     display: block;
