@@ -532,6 +532,11 @@ footer {
     .support-more-col {
         display: inline-block;
         vertical-align: middle;
+
+    }
+    .dhhs-icon a {
+        display: block;
+        max-width: 170px;
     }
 }
 @supports (display: flex) {

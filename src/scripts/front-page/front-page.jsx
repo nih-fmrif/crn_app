@@ -146,7 +146,7 @@ let FrontPage = React.createClass({
                                         <img src="./assets/nih-nimh.png" alt="National Institute of Mental Health"/>
                                     </a>
                                 </div>
-                                <div className="support-more-col">
+                                <div className="support-more-col dhhs-icon">
                                     <a target="_blank" href="https://www.hhs.gov/" title="HHS">
                                         <img src="./assets/dhhs.png" alt="Department of Health and Human Services"/>
                                     </a>
