@@ -24,7 +24,9 @@ let Dashboard = React.createClass({
                 <div className="col-xs-12">
                     <ul className="nav nav-pills tabs">
                         <li><Link to={isPublic ? 'publicDatasets' : 'datasets'} className="btn-tab">{isPublic ? 'Public' : 'My'} Datasets</Link></li>
+{/*
                         <li><Link to={isPublic ? 'publicJobs'     : 'jobs'}     className="btn-tab">{isPublic ? 'Public' : 'My'} Analyses</Link></li>
+*/}
                     </ul>
                     <RouteHandler/>
                 </div>
