@@ -37,7 +37,7 @@ let Tools = React.createClass({
         let isAdmin      = dataset.access === 'admin',
             // isEditor     = dataset.access === 'rw',
             // isViewer     = dataset.access === 'ro',
-            isSignedIn   = !!userStore.hasToken(),
+            // isSignedIn   = !!userStore.hasToken(),
             isPublic     = !!dataset.status.public,
             isIncomplete = !!dataset.status.incomplete,
             isInvalid    = !!dataset.status.invalid,

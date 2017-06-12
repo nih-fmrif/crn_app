@@ -11,8 +11,8 @@ import Pipelines     from './front-page.pipelines.jsx';
 import FPActions     from './front-page.actions.js';
 
 //silence lint errors while allowing somewhat simpler merges with upstream
-var _ = FrontPageTabs;
-var _ = Pipelines;
+//var _ = FrontPageTabs;
+//var _ = Pipelines;
 
 // component setup ----------------------------------------------------
 
