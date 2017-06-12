@@ -6,7 +6,7 @@ import moment         from 'moment';
 import actions        from './dataset.actions.js';
 import WarnButton     from '../common/forms/warn-button.jsx';
 import uploadStore    from '../upload/upload.store';
-import userStore      from '../user/user.store.js';
+//import userStore      from '../user/user.store.js';
 import datasetActions from './dataset.actions.js';
 import ToolModals     from './dataset.tools.modals.jsx';
 
