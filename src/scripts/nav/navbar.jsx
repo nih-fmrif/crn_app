@@ -70,7 +70,7 @@ let BSNavbar = React.createClass({
                     <Link className="nav-link" to="publicDashboard"><span className="link-name">Public Dashboard</span></Link>
                 </li>
                 <li className="link-contact">
-                    <a className="nav-link" href="mailto:dsst@mail.nih.gov?subject=NIDO" target="_blank"><span className="link-name">contact</span></a>
+                    <a className="nav-link" href="mailto:nimhdsst@mail.nih.gov?subject=NIDO" target="_blank"><span className="link-name">contact</span></a>
                 </li>
                 <li className="link-admin">
                     {this.state.scitran && this.state.scitran.root ? adminLink : null}

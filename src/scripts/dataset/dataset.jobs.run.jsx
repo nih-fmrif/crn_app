@@ -136,7 +136,7 @@ class JobAccordion extends React.Component {
 
     _failedMessage(run) {
         if (run.agave.status === 'FAILED') {
-            let adminMessage = <span>Please contact the site <a href="mailto:dsst@mail.nih.gov?subject=NIDO%20Analysis%20Failure" target="_blank">administrator</a> if this analysis continues to fail.</span>;
+            let adminMessage = <span>Please contact the site <a href="mailto:nimhdsst@mail.nih.gov?subject=NIDO%20Analysis%20Failure" target="_blank">administrator</a> if this analysis continues to fail.</span>;
             let message = run.agave.message ? run.agave.message : 'We were unable to complete this analysis.';
             return (
                 <div>
