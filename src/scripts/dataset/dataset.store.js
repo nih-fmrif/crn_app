@@ -25,7 +25,7 @@ let datasetStore = Reflux.createStore({
 
     init: function () {
         this.setInitialState();
-        this.loadApps();
+        //this.loadApps();
         this.listenTo(uploadStore, (data) => {
             if (data.projectId !== this.data.currentUploadId) {
                 this.update({currentUploadId: data.projectId});
@@ -207,6 +207,7 @@ let datasetStore = Reflux.createStore({
      * Load Apps
      */
     loadApps() {
+        return false;
         this.update({loadingApps: true});
         crn.getApps((err, res) => {
             if (res.body) {
@@ -332,7 +333,7 @@ let datasetStore = Reflux.createStore({
 
         // reload app is missing for job modals
         if (name === 'jobs' && (!this.data.apps || this.data.apps.length === 0)) {
-            this.loadApps();
+            //this.loadApps();
         }
 
         if (name === 'displayFile') {
