@@ -82,6 +82,7 @@ gulp.task('copy', function () {
 
 // bundle js
 gulp.task('buildApp', function(cb) {
+    require('dotenv').config();
     process.env.NODE_ENV = 'production';
     browserify(p.jsx)
         .transform(babelify)
@@ -116,6 +117,7 @@ gulp.task('styles', function() {
 
 // watch for js changes
 gulp.task('watchApp', function() {
+    require('dotenv').config();
     var bundler = watchify(browserify(p.jsx, watchify.args));
     function rebundle() {
         return bundler
