@@ -21,6 +21,7 @@ export default {
 		 * Authentication
 		 */
 		auth: {
+			type: 'google',
 			google: {
 				clientID: process.env.SCITRAN_AUTH_CLIENT_ID
 			}
