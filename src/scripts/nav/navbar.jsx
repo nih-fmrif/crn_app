@@ -7,6 +7,8 @@ import Usermenu  from './navbar.usermenu.jsx';
 import UploadBtn from './navbar.upload-button.jsx';
 import userStore from '../user/user.store.js';
 import {Navbar}  from 'react-bootstrap';
+import di        from '../services/containers';
+const auth = di.auth;
 
 // component setup ---------------------------------------------------------------
 
@@ -54,17 +56,19 @@ let BSNavbar = React.createClass({
     },
 
     _navMenu() {
-        let isLoggedIn    = !!this.state.token;
-        let googleProfile = this.state.google;
-        let loading       = this.state.loading;
-        let routes        = this.props.routes;
-        let adminLink     = <Link className="nav-link" to="admin"><span className="link-name">admin</span></Link>;
-        let dashboardLink = <Link className="nav-link" to="dashboard"><span className="link-name">my dashboard</span></Link>;
+        const isLoggedIn    = !!this.state.token;
+        const profile       = this.state.profile;
+        const isRoot        = this.state.profile && this.state.profile.root;
+
+        const loading       = this.state.loading;
+        const routes        = this.props.routes;
+        const adminLink     = <Link className="nav-link" to="admin"><span className="link-name">admin</span></Link>;
+        const dashboardLink = <Link className="nav-link" to="dashboard"><span className="link-name">my dashboard</span></Link>;
 
         return (
             <ul className="nav navbar-nav main-nav">
                 <li className="link-dashboard">
-                    {userStore.hasToken() ? dashboardLink : null}
+                    {isLoggedIn ? dashboardLink : null}
                 </li>
                 <li className="link-public">
                     <Link className="nav-link" to="publicDashboard"><span className="link-name">Public Dashboard</span></Link>
@@ -73,14 +77,14 @@ let BSNavbar = React.createClass({
                     <a className="nav-link" href="mailto:nimhdsst@mail.nih.gov?subject=NIDO" target="_blank"><span className="link-name">contact</span></a>
                 </li>
                 <li className="link-admin">
-                    {this.state.scitran && this.state.scitran.root ? adminLink : null}
+                    {isRoot ? adminLink : null}
                 </li>
                 <li className="link-dashboard">
-                    {googleProfile ? <UploadBtn /> : null}
+                    {profile ? <UploadBtn /> : null}
                 </li>
                  <li>
                      <Navbar.Collapse eventKey={0}>
-                            {isLoggedIn && !loading ? <Usermenu profile={googleProfile}/> : this._signIn(loading, routes)}
+                            {isLoggedIn && !loading ? <Usermenu profile={profile}/> : this._signIn(loading, routes)}
                     </Navbar.Collapse>
                 </li>
             </ul>
