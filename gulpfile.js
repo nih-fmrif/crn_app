@@ -59,7 +59,8 @@ gulp.task('browserSync', function() {
     browserSync.init({
         server: './dist',
         port: 9876,
-        middleware: rewrite()
+        middleware: rewrite(),
+        https: true
     });
 });
 
