@@ -23,7 +23,8 @@ export default {
 		auth: {
 			type: 'google',
 			google: {
-				clientID: process.env.SCITRAN_AUTH_CLIENT_ID
+				clientId: process.env.SCITRAN_AUTH_CLIENT_ID,
+				scopes: 'email,openid'
 			}
 		},
 
