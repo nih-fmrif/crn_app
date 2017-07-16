@@ -39,6 +39,25 @@ var p = {
     env:        'prod'
 };
 
+const babelrc = {
+    plugins: [
+        ['transform-runtime', {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true,
+            "moduleName": "babel-runtime"
+        }],
+        ['transform-object-rest-spread', {
+            'useBuiltIns': false
+        }]
+    ],
+    presets: ['react', ['env', {
+        targets: {
+            uglify: true
+        }
+    }]]
+};
+
 // primary tasks ----------------------------------------------------------
 
 gulp.task('build', ['styles', 'buildApp'], function() {
@@ -86,7 +105,7 @@ gulp.task('buildApp', function(cb) {
     require('dotenv').config();
     process.env.NODE_ENV = 'production';
     browserify(p.jsx)
-        .transform(babelify)
+        .transform(babelify, babelrc)
         .bundle()
         .pipe(source(p.bundle))
         .pipe(buffer())
@@ -119,7 +138,7 @@ gulp.task('styles', function() {
 // watch for js changes
 gulp.task('watchApp', function() {
     require('dotenv').config();
-    var bundler = watchify(browserify(p.jsx, watchify.args));
+    const bundler = watchify(browserify(p.jsx, watchify.args));
     function rebundle() {
         return bundler
             .bundle()
@@ -132,7 +151,7 @@ gulp.task('watchApp', function() {
             .pipe(gulp.dest(p.dist))
             .pipe(reload({stream: true}));
     }
-    bundler.transform(babelify).on('update', rebundle);
+    bundler.transform(babelify, babelrc).on('update', rebundle);
     return rebundle();
 });
 
