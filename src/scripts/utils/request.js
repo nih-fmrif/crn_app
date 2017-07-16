@@ -1,6 +1,7 @@
 import request     from 'superagent';
 import config      from '../../../config';
-import userActions from '../user/user.actions.js';
+import di          from '../services/containers';
+const auth = di.auth;
 
 /**
  * Request
@@ -9,7 +10,7 @@ import userActions from '../user/user.actions.js';
  * Provides a place for global request settings
  * and response handling.
  */
-var Request = {
+const Request = {
 
     get (url, options, callback) {
         handleRequest(url, options, function (url, options) {
@@ -91,7 +92,7 @@ var Request = {
  *   - snapshot: A boolean that will add a 'snapshots' url
  *   param to scitran requests.
  */
-function handleRequest (url, options, callback) {
+async function handleRequest (url, options, callback) {
 
     // normalize options to play nice with superagent requests
     options = normalizeOptions(options);
@@ -101,13 +102,13 @@ function handleRequest (url, options, callback) {
         url = config.scitran.url + 'snapshots/' + url.slice(config.scitran.url.length);
     }
 
-    // verify access token before authenticated requests
-    if (options.auth && hasToken() && (url.indexOf(config.scitran.url) > -1 || url.indexOf(config.crn.url) > -1)) {
-        userActions.checkAuth((token, root) => {
-            if (root) {options.query.root = true;}
-            options.headers.Authorization = token;
-            callback(url, options);
-        });
+    if (options.auth && auth.hasToken() && (url.indexOf(config.scitran.url) > -1 || url.indexOf(config.crn.url) > -1)) {
+        const token = await auth.getAccessToken();
+        if (await auth.isRoot()) {
+            options.query.root = true;
+        }
+        options.headers.Authorization = token;
+        callback(url, options);
     } else {
         callback(url, options);
     }
@@ -136,12 +137,6 @@ function normalizeOptions (options) {
     if (!options.query)   {options.query   = {};}
     if (!options.hasOwnProperty('auth')) {options.auth = true;}
     return options;
-}
-
-function hasToken () {
-    if (!window.localStorage.token) {return false;}
-    let credentials = JSON.parse(window.localStorage.token);
-    return credentials && credentials.hasOwnProperty('access_token') && credentials.access_token;
 }
 
 export default Request;
