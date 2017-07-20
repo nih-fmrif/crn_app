@@ -21,7 +21,7 @@ export default {
 		 * Authentication
 		 */
 		auth: {
-			type: 'globus',
+			type: process.env.AUTH_TYPE,
 			globus: {
         authUri: process.env.CRN_SERVER_URL + '/crn/auth/globus',
         refreshTokenUri: process.env.CRN_SERVER_URL + '/crn/auth/globus/refresh',
