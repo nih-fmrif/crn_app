@@ -25,6 +25,7 @@
     "dotenv": "^4.0.0",
     "es6-react-mixins": "^0.1.6",
     "favico.js": "git://github.com/ejci/favico.js#0.3.10",
+    "humanparser": "^1.4.0",
     "moment": "^2.10.3",
     "pluralize": "^1.1.2",
     "query-string": "^4.3.4",

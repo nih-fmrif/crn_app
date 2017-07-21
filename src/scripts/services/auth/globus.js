@@ -1,6 +1,7 @@
 import config from '../../../../config';
 import queryString from 'query-string';
 import axios from 'axios';
+import humanparser from 'humanparser';
 
 export default function (common, logger) {
 
@@ -20,7 +21,6 @@ export default function (common, logger) {
   const getAccessToken = getAccessTokenQueue();
 
   return Object.freeze({
-    fetchUser,
     getAccessToken,
     handleAuthCallback,
     init,
@@ -35,38 +35,13 @@ export default function (common, logger) {
         oAuth.expires = Date.now() + oAuth.expires_in;
         saveOauth(oAuth);
 
-        const user = JSON.parse(url.globusUser);
+        const user = getUserFromGlobusUser(JSON.parse(url.globusUser));
         saveUser(user);
 
       } catch(err) {
         logger.error('Unknown authentication error.', err);
       }
       saveAuthProp('signin_finished', true);
-    }
-  }
-
-  async function fetchUser() {
-    const authInstance = getAuthInstance();
-    const globusUser = await popsicle(authInstance.sign({
-      method: 'get',
-      url: config.auth.globus.userInfoUri
-    })).then(res => JSON.parse(res.body));
-
-    if (globusUser) {
-      const {
-        preferred_username,
-        email,
-        name
-      } = globusUser;
-
-      return {
-        preferred_username,
-        email,
-        name
-      };
-
-    } else {
-      return {};
     }
   }
 
@@ -143,6 +118,16 @@ export default function (common, logger) {
     } else {
       logger.debug('Signin not yet finished.');
       setTimeout(() => isInitialized(resolve, reject), 500);
+    }
+  }
+
+  function getUserFromGlobusUser(globusUser) {
+    const name = humanparser.parseName(globusUser.name);
+    return {
+      _id:        globusUser.preferred_username,
+      firstname:  name.firstName,
+      lastname:   name.middleName ? name.middleName + ' ' + name.lastName : name.lastName,
+      email:      globusUser.email
     }
   }
 }
