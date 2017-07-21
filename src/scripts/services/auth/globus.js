@@ -13,6 +13,7 @@ export default function (common, logger) {
     hasToken,
     saveAuthProp,
     saveOauth,
+    saveUser,
     signOut,
   } = common;
 
@@ -28,11 +29,15 @@ export default function (common, logger) {
 
   async function handleAuthCallback() {
     const url = queryString.parse(window.location.search);
-    if (url.globusOauth) {
+    if (url && url.globusOauth && url.globusUser) {
       try {
         const oAuth = JSON.parse(url.globusOauth);
         oAuth.expires = Date.now() + oAuth.expires_in;
         saveOauth(oAuth);
+
+        const user = JSON.parse(url.globusUser);
+        saveUser(user);
+
       } catch(err) {
         logger.error('Unknown authentication error.', err);
       }
