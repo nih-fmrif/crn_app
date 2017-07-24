@@ -10,6 +10,7 @@ export default function(logger) {
     getStoredAccessToken,
     getStoredRefreshToken,
     getCrnProfile,
+    handleAuthCallback,
     hasToken,
     isRoot,
     isSignedIn,
