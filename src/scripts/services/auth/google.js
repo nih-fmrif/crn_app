@@ -1,8 +1,19 @@
 /* global gapi */
+// TODO: config service
 import config from '../../../../config';
 
+/**
+ * Google authentication provider implementation
+ *
+ * @param common - Common helpers
+ * @param logger - Logger service
+ * @returns {Object}
+ */
 export default function(common, logger) {
 
+  /**
+   * Helpers from the Common library, used by all auth provider implementation
+   */
   const {
     accessTokenExpired,
     assertUser,
@@ -13,9 +24,19 @@ export default function(common, logger) {
     saveCrnProfile
   } = common;
 
+  /**
+   * Google auth instance
+   */
   let authInstance = null;
+
+  /**
+   * Create a getAccessToken function
+   */
   const getAccessToken = getAccessTokenQueue();
 
+  /**
+   * Exposed methods
+   */
   return Object.freeze({
     fetchUser,
     getAccessToken,
@@ -24,6 +45,12 @@ export default function(common, logger) {
     signOut,
   });
 
+  /**
+   * Call global gapi instance to initialize Google session.
+   * Saves authInstance for further usage.
+   *
+   * @returns {Promise}
+   */
   async function init() {
     return new Promise((resolve, reject) => {
       try {
@@ -44,6 +71,13 @@ export default function(common, logger) {
     });
   }
 
+  /**
+   * A factory that returns a function, that has an inner state,
+   * and if there is an ongoing request to refresh access token,
+   * return the promise of that request.
+   *
+   * @returns {function()}
+   */
   function getAccessTokenQueue() {
     let refreshRequest = null;
     return async () => {
@@ -63,6 +97,9 @@ export default function(common, logger) {
     };
   }
 
+  /**
+   * @returns {Promise.<*>}
+   */
   async function refreshToken() {
     if (!authInstance) {
       throw new Error('Google seems not to be initialized.');
@@ -71,6 +108,11 @@ export default function(common, logger) {
     return saveOauth(oAuth);
   }
 
+  /**
+   * Initiate Google OAutch signin process
+   *
+   * @returns {Promise.<void>}
+   */
   async function signIn() {
     if (!authInstance) {
       throw new Error('Google seems not to be initialized.');
@@ -80,6 +122,7 @@ export default function(common, logger) {
       prompt: 'select_account'
     });
 
+    // Try out our new refresh token
     await refreshToken();
 
     try {
@@ -98,6 +141,11 @@ export default function(common, logger) {
     }
   }
 
+  /**
+   * Fetch authenticated form Google
+   *
+   * @returns {Promise.{_id: string, firstname: string, lastname: string, email: string}}
+   */
   async function fetchUser() {
     const user = await authInstance.currentUser.get();
     const basicProfile = await user.getBasicProfile();
@@ -116,6 +164,9 @@ export default function(common, logger) {
     }
   }
 
+  /**
+   * @returns {Promise.<void>}
+   */
   async function signOut() {
     await authInstance.signOut();
     saveOauth({});
