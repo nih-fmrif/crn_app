@@ -124,7 +124,7 @@ export default function (common, logger) {
   function getUserFromGlobusUser(globusUser) {
     const name = humanparser.parseName(globusUser.name);
     return {
-      _id:        globusUser.preferred_username,
+      _id:        globusUser.email,
       firstname:  name.firstName,
       lastname:   name.middleName ? name.middleName + ' ' + name.lastName : name.lastName,
       email:      globusUser.email
