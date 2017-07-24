@@ -5,11 +5,11 @@ export default function(common, logger) {
 
   const {
     accessTokenExpired,
+    assertUser,
     getStoredAccessToken,
     hasToken,
     saveOauth,
     saveUser,
-    assertUser
   } = common;
 
   let authInstance = null;
@@ -87,11 +87,13 @@ export default function(common, logger) {
     await refreshToken();
 
     try {
-      await assertUser();
 
-      // Save user data
-      // const user = await fetchUser();
-      // saveUser(user);
+      // Fetch and save the user with the access token
+      const user = await fetchUser();
+      saveUser(user);
+
+      // Be sure that the user exists in CRN database
+      await assertUser();
 
     } catch (err) {
       logger.error('Cannot verify user.', err);
@@ -108,9 +110,10 @@ export default function(common, logger) {
 
     if (basicProfile) {
       return {
-        preferred_username: basicProfile.getEmail(),
+        _id:                basicProfile.getEmail(),
         email:              basicProfile.getEmail(),
-        name:               basicProfile.getName()
+        firstname:          basicProfile.getGivenName(),
+        lastname:           basicProfile.getFamilyName()
       };
     } else {
       return {};
