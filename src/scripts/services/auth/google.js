@@ -18,15 +18,10 @@ export default function(common, logger) {
   return Object.freeze({
     fetchUser,
     getAccessToken,
-    handleAuthCallback,
     init,
     signIn,
     signOut,
   });
-
-  function handleAuthCallback() {
-    return null;
-  }
 
   async function init() {
     return new Promise((resolve, reject) => {

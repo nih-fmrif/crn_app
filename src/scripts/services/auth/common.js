@@ -20,6 +20,9 @@ export default function(logger) {
     verifyUser
   });
 
+  function handleAuthCallback() {
+    return null;
+  }
   function verifyUser() {
     return new Promise((resolve, reject) => {
       crn.verifyUser((err, res) => {
