@@ -36,7 +36,7 @@ let Issues = React.createClass({
                 {errors.length === 0 ? <button className="btn-blue" onClick={actions.checkExists.bind(null, tree, false)}>Continue</button> : null}
                 {uploadResetLink}
                 <ErrorLink dirName={dirName} errors={errors} warnings={warnings} />
-                <span className="bids-link">Click to view details on <a href="http://bids.neuroimaging.io" target="_blank">BIDS specification</a></span>
+                <span className="bids-link">Click to view details on <a href="http://bids.neuroimaging.io" target="_blank" rel="noopener noreferrer" >BIDS specification</a></span>
             </div>
         );
 

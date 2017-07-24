@@ -15,7 +15,7 @@ let Footer = React.createClass({
             <footer>
                 <div className="row">
                     <div className="col-xs-12 col-md-4 version">
-                        <span><a target="_blank" href="https://github.com/poldracklab/crn_deploy" title="OpenNeuro on Github">OpenNeuro Beta v.{packageJson.version}</a></span>
+                        <span><a target="_blank" rel="noopener noreferrer" href="https://github.com/poldracklab/crn_deploy" title="OpenNeuro on Github">OpenNeuro Beta v.{packageJson.version}</a></span>
                     </div>
 {/*
                     <div className="col-xs-12 col-md-4 footer-menu">

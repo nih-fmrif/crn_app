@@ -16,7 +16,7 @@ let UploadBtn = React.createClass({
 
 // life cycle methods ------------------------------------------------------------
 
-    render: function () {
+    render() {
 
         let progress = (
             <a className="nav-link nl-upload nl-progress"  onClick={Actions.toggleModal}>

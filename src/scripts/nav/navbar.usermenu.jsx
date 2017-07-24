@@ -15,7 +15,7 @@ let Usermenu = React.createClass({
 
 // life cycle methods ------------------------------------------------------------
 
-    render: function () {
+    render() {
 
         let profile = this.props.profile;
         if (!profile) {return false;}

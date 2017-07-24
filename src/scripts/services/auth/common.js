@@ -101,7 +101,6 @@ export default function(logger) {
           break;
         default:
           throw error;
-          break;
       }
     }
   }
@@ -185,7 +184,7 @@ export default function(logger) {
    * @returns {*}
    */
   function getOauth() {
-    return getAuthProp('oauth')
+    return getAuthProp('oauth');
   }
 
   /**
@@ -203,7 +202,7 @@ export default function(logger) {
    * @returns {*}
    */
   function getUser() {
-    return getAuthProp('user')
+    return getAuthProp('user');
   }
 
   /**

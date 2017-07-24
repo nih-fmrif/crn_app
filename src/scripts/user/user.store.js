@@ -1,6 +1,5 @@
 // dependencies ----------------------------------------------------------------------
 
-import React            from 'react';
 import Reflux           from 'reflux';
 import actions          from './user.actions.js';
 import scitran          from '../utils/scitran';

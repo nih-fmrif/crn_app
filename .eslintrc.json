@@ -6,6 +6,7 @@
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
+        "ecmaVersion": 2017,
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
             "jsx": true
@@ -16,17 +17,15 @@
         "react"
     ],
     "rules": {
-        "indent": [
-            "error",
-            4
-        ],
+        "react/no-string-refs": "off",
         "linebreak-style": [
             "error",
             "unix"
         ],
         "quotes": [
             "error",
-            "single"
+            "single",
+            { "allowTemplateLiterals": true }
         ],
         "semi": [
             "error",

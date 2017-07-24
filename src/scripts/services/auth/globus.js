@@ -194,6 +194,6 @@ export default function (common, logger) {
       firstname:  String(name.firstName),
       lastname:   name.middleName ? name.middleName + ' ' + name.lastName : String(name.lastName),
       email:      String(globusUser.email)
-    }
+    };
   }
 }

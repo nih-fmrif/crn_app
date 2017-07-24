@@ -335,7 +335,7 @@ let UploadStore = Reflux.createStore({
 
         notifications.createAlert({
             type: 'Error',
-            message: <span>There was an error uploading your dataset. Please refresh the page and try again. If the issue persists, contact the site <a  href="mailto:nimhdsst@mail.nih.gov?subject=Upload%20Error" target="_blank">administrator</a>.</span>
+            message: <span>There was an error uploading your dataset. Please refresh the page and try again. If the issue persists, contact the site <a  href="mailto:nimhdsst@mail.nih.gov?subject=Upload%20Error" target="_blank" rel="noopener noreferrer">administrator</a>.</span>
         });
         this.setInitialState();
         window.onbeforeunload = function() {};

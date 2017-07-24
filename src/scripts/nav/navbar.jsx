@@ -7,8 +7,6 @@ import Usermenu  from './navbar.usermenu.jsx';
 import UploadBtn from './navbar.upload-button.jsx';
 import userStore from '../user/user.store.js';
 import {Navbar}  from 'react-bootstrap';
-import di        from '../services/containers';
-const auth = di.auth;
 
 // component setup ---------------------------------------------------------------
 
@@ -21,8 +19,7 @@ let BSNavbar = React.createClass({
         routes: React.PropTypes.array
     },
 
-    render: function () {
-
+    render() {
         return (
             <span>
                 <Navbar collapseOnSelect>
@@ -74,7 +71,7 @@ let BSNavbar = React.createClass({
                     <Link className="nav-link" to="publicDashboard"><span className="link-name">Public Dashboard</span></Link>
                 </li>
                 <li className="link-contact">
-                    <a className="nav-link" href="mailto:nimhdsst@mail.nih.gov?subject=NIDO" target="_blank"><span className="link-name">contact</span></a>
+                    <a className="nav-link" href="mailto:nimhdsst@mail.nih.gov?subject=NIDO" target="_blank" rel="noopener noreferrer"><span className="link-name">contact</span></a>
                 </li>
                 <li className="link-admin">
                     {isRoot ? adminLink : null}

@@ -15,7 +15,6 @@ import config      from '../../../config';
 import files       from '../utils/files';
 import request     from '../utils/request';
 import moment      from 'moment';
-import FPActions   from '../front-page/front-page.actions.js';
 
 let datasetStore = Reflux.createStore({
 
@@ -208,20 +207,20 @@ let datasetStore = Reflux.createStore({
      */
     loadApps() {
         return false;
-        this.update({loadingApps: true});
-        crn.getApps((err, res) => {
-            if (res.body) {
-                res.body.sort((a, b) => {
-                    let aName = a.label.toUpperCase();
-                    let bName = b.label.toUpperCase();
-                    return (aName < bName) ? -1 : (aName > bName) ? 1 : 0;
-                });
-                FPActions.setApps(res.body);
-                this.update({apps: res.body, loadingApps: false});
-            } else {
-                setTimeout(this.loadApps, 5000);
-            }
-        });
+        // this.update({loadingApps: true});
+        // crn.getApps((err, res) => {
+        //     if (res.body) {
+        //         res.body.sort((a, b) => {
+        //             let aName = a.label.toUpperCase();
+        //             let bName = b.label.toUpperCase();
+        //             return (aName < bName) ? -1 : (aName > bName) ? 1 : 0;
+        //         });
+        //         FPActions.setApps(res.body);
+        //         this.update({apps: res.body, loadingApps: false});
+        //     } else {
+        //         setTimeout(this.loadApps, 5000);
+        //     }
+        // });
     },
 
     /**
