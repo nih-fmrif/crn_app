@@ -10,6 +10,7 @@ export default function(common, logger) {
     hasToken,
     saveOauth,
     saveUser,
+    saveCrnProfile
   } = common;
 
   let authInstance = null;
@@ -119,5 +120,6 @@ export default function(common, logger) {
     await authInstance.signOut();
     saveOauth({});
     saveUser({});
+    saveCrnProfile({});
   }
 }
