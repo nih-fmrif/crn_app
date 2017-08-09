@@ -7,6 +7,12 @@
     "type": "git"
   },
   "scripts": {
+    "build": "gulp build",
+    "start": "cd dist && serve-https -p 8443",
+    "prestart": "npm run build",
+    "start-prod": "cd dist && pm2-docker ../node_modules/.bin/serve -- -p 8111",
+    "prestart-prod": "npm run build",
+    "start-dev": "gulp",
     "lint": "eslint src/scripts/**/**/**/* src/tests/scripts/**/**/**/*",
     "test": "jest"
   },
@@ -28,6 +34,7 @@
     "humanparser": "^1.4.0",
     "moment": "^2.10.3",
     "pluralize": "^1.1.2",
+    "pm2": "^2.6.1",
     "query-string": "^4.3.4",
     "react": "0.14.8",
     "react-bootstrap": "0.29.4",
@@ -37,6 +44,8 @@
     "reactable": "0.14.0",
     "reflux": "^0.2.7",
     "remarkable": "1.6.2",
+    "serve": "^6.0.5",
+    "serve-https": "^2.2.1",
     "spark-md5": "^1.0.0",
     "superagent": "^1.0.0"
   },
