@@ -1,0 +1,30 @@
+{
+  "plugins": [
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
+      }
+    ],
+    [
+      "transform-object-rest-spread",
+      {
+        "useBuiltIns": false
+      }
+    ]
+  ],
+  "presets": [
+    "react",
+    [
+      "env",
+      {
+        "targets": {
+          "uglify": true
+        }
+      }
+    ]
+  ]
+}
