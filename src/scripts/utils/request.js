@@ -1,7 +1,5 @@
 import request     from 'superagent';
 import config      from '../../../config';
-import di          from '../services/containers';
-const auth = di.auth;
 
 /**
  * Request
@@ -93,6 +91,11 @@ const Request = {
  *   param to scitran requests.
  */
 async function handleRequest (url, options, callback) {
+
+    // Circular dependency, so load di running time
+    // A more permanent solution will be when this request lib would be integrated into auth service
+    const di = require('../services/containers').default;
+    const auth = di.auth;
 
     // normalize options to play nice with superagent requests
     options = normalizeOptions(options);
