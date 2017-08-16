@@ -147,7 +147,7 @@ export default function(logger) {
    * @returns {boolean}
    */
   function isRoot() {
-    const user = getUser();
+    const user = getCrnProfile();
     return !!(user.root);
   }
 

@@ -1,24 +1,24 @@
 // dependencies ----------------------------------------------------
 
 import React from 'react';
-import userStore from '../user/user.store.js';
+import di from '../services/containers';
+const authService = di.auth;
 
 // require auth ----------------------------------------------------
 
-var requireAuth = (Component, role) => {
-    return class Authenticated extends React.Component {
-        static willTransitionTo(transition) {
-            role = role ? role : 'user';
-            if (!userStore.data.token) { // if not logged in
-                transition.redirect('front-page', {});
-            } else if (role === 'admin' && (!userStore.data.scitran || !userStore.data.scitran.root)) {
-                transition.redirect('front-page', {});
-            }
+var requireAuth = (Component, role = 'user') => {
+  return class Authenticated extends React.Component {
+    static willTransitionTo(transition) {
+      return authService.isSignedIn().then(signedIn => {
+        if (!signedIn || (role === 'admin' && !authService.isRoot())) {
+          transition.redirect('front-page', {});
         }
-        render () {
-            return <Component />;
-        }
-    };
+      });
+    }
+    render () {
+      return <Component />;
+    }
+  };
 };
 
 export default requireAuth;
