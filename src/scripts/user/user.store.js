@@ -10,7 +10,7 @@ import datasetActions   from '../dataset/dataset.actions';
 import upload           from '../upload/upload.actions';
 
 import di               from '../services/containers';
-const auth = di.auth;
+const authService = di.auth;
 const logger = di.logger;
 
 // store setup -----------------------------------------------------------------------
@@ -24,13 +24,13 @@ let UserStore = Reflux.createStore({
       this.update(this.getInitialState());
 
       try {
-        await auth.init();
+        await authService.init();
         logger.debug('Auth initialized.');
 
-        if (await auth.isSignedIn()) {
+        if (await authService.isSignedIn()) {
           logger.info('Signed in.');
-          const token = await auth.getAccessToken();
-          const profile = auth.getCrnProfile();
+          const token = await authService.getAccessToken();
+          const profile = authService.getCrnProfile();
           logger.debug(token, profile);
 
           this.update({
@@ -85,10 +85,10 @@ let UserStore = Reflux.createStore({
         const { transition } = options;
 
         try {
-          await auth.signIn(options);
+          await authService.signIn(options);
 
-          const token = auth.getStoredAccessToken();
-          const profile = auth.getCrnProfile();
+          const token = authService.getStoredAccessToken();
+          const profile = authService.getCrnProfile();
 
           this.update({
             loading: false,
@@ -110,10 +110,10 @@ let UserStore = Reflux.createStore({
           logger.error('Error happened while signing in', error);
 
           switch (error.type) {
-            case auth.errors.SIGNIN_BLOCKED_USER:
+            case authService.errors.SIGNIN_BLOCKED_USER:
               this.handleSigninError(transition, `<span>This user account has been blocked. If you believe this is by mistake please contact the <a href="mailto:nimhdsst@mail.nih.gov?subject=Center%20for%20Reproducible%20Neuroscience%20Blocked%20User" target="_blank">site administrator</a>.</span>`);
               break;
-            case auth.errors.SIGNIN_UNKNOWN_ERROR:
+            case authService.errors.SIGNIN_UNKNOWN_ERROR:
               this.handleSigninError(transition, 'We are currently experiencing issues. Please try again later.');
               break;
             default:
@@ -147,7 +147,7 @@ let UserStore = Reflux.createStore({
             signout = confirm('You are currently uploading files. Signing out of this site will cancel the upload process. Are you sure you want to sign out?');
         }
         if (signout) {
-            await auth.signOut();
+            await authService.signOut();
             this.clearAuth();
             upload.setInitialState();
             router.transitionTo('front-page');
@@ -176,19 +176,19 @@ let UserStore = Reflux.createStore({
      * Calls back with the current user's preferences.
      */
     getPreferences(callback) {
-        callback(this.data.scitran.preferences);
+        callback(authService.getCrnProfile().preferences || {});
     },
 
     /**
      * Update Preferences
      */
     updatePreferences(preferences, callback) {
-        let scitranUser = this.data.scitran;
+        let scitranUser = authService.getCrnProfile();
         scitranUser.preferences = scitranUser.preferences ? scitranUser.preferences : {};
         for (let key in preferences) {
             scitranUser.preferences[key] = preferences[key];
         }
-        scitran.updateUser(this.data.scitran._id, {preferences: preferences}, (err, res) => {
+        scitran.updateUser(authService.getSignedInUserId(), {preferences: preferences}, (err, res) => {
             this.update({scitran: scitranUser});
             if (callback) {callback(err, res);}
         });

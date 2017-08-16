@@ -14,6 +14,8 @@ import datasetsActions from '../dashboard/dashboard.datasets.actions';
 import datasetActions  from '../dataset/dataset.actions';
 import favico          from 'favico.js';
 import bowser          from 'bowser';
+import di              from '../services/containers';
+const authService = di.auth;
 
 let favicon = new favico();
 
@@ -213,7 +215,7 @@ let UploadStore = Reflux.createStore({
             }
 
             let self = this;
-            let userId = userStore.data.scitran._id;
+            let userId = authService.getSignedInUserId();
             if (!this.data.resuming) {
                 scitran.getProjects({}, function (projects) {
                     let existingProjectId;
@@ -276,7 +278,7 @@ let UploadStore = Reflux.createStore({
         let uploadingFavicon = document.getElementById('favicon_upload');
         favicon.image(uploadingFavicon); // set new favicon image
 
-        upload.upload(userStore.data.scitran._id, this.data.dirName, fileList, {validation, summary: this.data.summary}, (progress, projectId) => {
+        upload.upload(authService.getSignedInUserId(), this.data.dirName, fileList, {validation, summary: this.data.summary}, (progress, projectId) => {
             projectId = projectId ? projectId : this.data.projectId;
             this.update({progress, uploading: true, projectId});
             if (!datasetsUpdated && progress.completed > 0) {datasetsActions.getDatasets(); datasetsUpdated = true;}

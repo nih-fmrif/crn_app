@@ -3,8 +3,9 @@
 import Reflux       from 'reflux';
 import Actions      from './dashboard.jobs.actions.js';
 import crn          from '../utils/crn';
-import userStore    from '../user/user.store.js';
 import dashUtils    from './dashboard.utils.js';
+import di           from '../services/containers';
+const authService = di.auth;
 
 // store setup -----------------------------------------------------------------------
 
@@ -76,9 +77,9 @@ let DashboardJobStore = Reflux.createStore({
      * a list of jobs and sorts by the current
      * sort setting.
      */
-    getJobs(isPublic) {
+    async getJobs(isPublic) {
         if (isPublic === undefined) {isPublic = this.data.isPublic;}
-        let isSignedOut = !userStore.data.token;
+        let isSignedOut = !(await authService.isSignedIn());
         this.setInitialState({loading: true}, () => {
             crn.getJobs((err, res) => {
                 for (let app of res.body.availableApps) {app.value = app.label;}

@@ -15,6 +15,8 @@ import config      from '../../../config';
 import files       from '../utils/files';
 import request     from '../utils/request';
 import moment      from 'moment';
+import di          from '../services/containers';
+const authService = di.auth;
 
 let datasetStore = Reflux.createStore({
 
@@ -103,11 +105,11 @@ let datasetStore = Reflux.createStore({
      *
      * Takes a datasetId and loads the dataset.
      */
-    loadDataset(datasetId, options) {
+    async loadDataset(datasetId, options) {
         let snapshot     = !!(options && options.snapshot),
             dataset      = this.data.dataset;
         options          = options ? options : {};
-        options.isPublic = !userStore.data.token;
+        options.isPublic = !(await authService.isSignedIn());
 
         // set active job if passed in query param
         if (options) {
@@ -989,7 +991,7 @@ let datasetStore = Reflux.createStore({
             executionSystem:   app.executionSystem,
             parameters:        parameters,
             snapshotId:        snapshotId,
-            userId:            userStore.data.scitran._id,
+            userId:            authService.getSignedInUserId(),
             batchQueue:        app.defaultQueue,
             memoryPerNode:     app.defaultMemoryPerNode,
             nodeCount:         app.defaultNodeCount,

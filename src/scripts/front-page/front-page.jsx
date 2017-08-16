@@ -9,6 +9,8 @@ import Spinner       from '../common/partials/spinner.jsx';
 import Footer        from '../common/partials/footer.jsx';
 //import Pipelines     from './front-page.pipelines.jsx';
 import FPActions     from './front-page.actions.js';
+import di from '../services/containers';
+const authService = di.auth;
 
 //silence lint errors while allowing somewhat simpler merges with upstream
 //var _ = FrontPageTabs;
@@ -21,8 +23,8 @@ let FrontPage = React.createClass({
     mixins: [Reflux.connect(userStore)],
 
     statics: {
-        willTransitionTo(transition) {
-            if (userStore.data.token) {
+        async willTransitionTo(transition) {
+            if (await authService.isSignedIn()) {
                 transition.redirect('dashboard');
             }
         }

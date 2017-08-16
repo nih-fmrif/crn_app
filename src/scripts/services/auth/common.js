@@ -18,6 +18,7 @@ export default function(logger) {
     getStoredAccessToken,
     getStoredRefreshToken,
     getCrnProfile,
+    getSignedInUserId,
     handleAuthCallback,
     hasToken,
     isRoot,
@@ -124,6 +125,10 @@ export default function(logger) {
     } else {
       return false;
     }
+  }
+
+  function getSignedInUserId() {
+    return getCrnProfile()['_id'];
   }
 
   /**
