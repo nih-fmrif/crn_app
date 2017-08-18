@@ -54,7 +54,9 @@ export default function(logger) {
   function verifyUser() {
     return new Promise((resolve, reject) => {
       crn.verifyUser((err, res) => {
-        if (res.body.code === 403) {
+        if (!res.body) {
+          reject({ type: errors.SIGNIN_UNKNOWN_ERROR});
+        } else if (res.body.code === 403) {
           reject({ type: errors.SIGNIN_UNKNOWN_USER});
         } else if (!res.body._id) {
           reject({ type: errors.SIGNIN_UNKNOWN_ERROR});

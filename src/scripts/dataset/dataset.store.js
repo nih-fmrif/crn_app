@@ -105,11 +105,11 @@ let datasetStore = Reflux.createStore({
      *
      * Takes a datasetId and loads the dataset.
      */
-    async loadDataset(datasetId, options) {
+    loadDataset(datasetId, options) {
         let snapshot     = !!(options && options.snapshot),
             dataset      = this.data.dataset;
         options          = options ? options : {};
-        options.isPublic = !(await authService.isSignedIn());
+        options.isPublic = !authService.hasToken();
 
         // set active job if passed in query param
         if (options) {

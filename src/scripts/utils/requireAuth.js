@@ -9,11 +9,10 @@ const authService = di.auth;
 var requireAuth = (Component, role = 'user') => {
   return class Authenticated extends React.Component {
     static willTransitionTo(transition) {
-      return authService.isSignedIn().then(signedIn => {
-        if (!signedIn || (role === 'admin' && !authService.isRoot())) {
-          transition.redirect('front-page', {});
-        }
-      });
+      const signedIn = authService.hasToken();
+      if (!signedIn || (role === 'admin' && !authService.isRoot())) {
+        transition.redirect('front-page', {});
+      }
     }
     render () {
       return <Component />;

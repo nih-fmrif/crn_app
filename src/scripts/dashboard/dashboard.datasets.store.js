@@ -72,9 +72,9 @@ let UploadStore = Reflux.createStore({
      * a list of datasets and sorts by the current
      * sort setting.
      */
-    async getDatasets(isPublic) {
+    getDatasets(isPublic) {
         if (isPublic === undefined) {isPublic = this.data.isPublic;}
-        let isSignedOut = !(await authService.isSignedIn());
+        let isSignedOut = !authService.hasToken();
         this.update({
             loading: true,
             sort: {

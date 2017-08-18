@@ -136,8 +136,8 @@ let Dataset = React.createClass({
         }
     },
 
-    async _leftSidebar(snapshots) {
-        let isSignedIn = await authService.isSignedIn();
+    _leftSidebar(snapshots) {
+        let isSignedIn = authService.hasToken();
         let snapshotOptions = snapshots.map((snapshot) => {
 
             if (snapshot.orphaned) {

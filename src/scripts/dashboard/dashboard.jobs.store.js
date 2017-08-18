@@ -77,9 +77,9 @@ let DashboardJobStore = Reflux.createStore({
      * a list of jobs and sorts by the current
      * sort setting.
      */
-    async getJobs(isPublic) {
+    getJobs(isPublic) {
         if (isPublic === undefined) {isPublic = this.data.isPublic;}
-        let isSignedOut = !(await authService.isSignedIn());
+        let isSignedOut = !authService.hasToken();
         this.setInitialState({loading: true}, () => {
             crn.getJobs((err, res) => {
                 for (let app of res.body.availableApps) {app.value = app.label;}

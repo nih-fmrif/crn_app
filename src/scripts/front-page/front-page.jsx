@@ -23,8 +23,8 @@ let FrontPage = React.createClass({
     mixins: [Reflux.connect(userStore)],
 
     statics: {
-        async willTransitionTo(transition) {
-            if (await authService.isSignedIn()) {
+        willTransitionTo(transition) {
+            if (authService.hasToken()) {
                 transition.redirect('dashboard');
             }
         }
