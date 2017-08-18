@@ -9,7 +9,6 @@ import notifications   from '../notification/notification.actions';
 import scitran         from '../utils/scitran';
 import upload          from './upload';
 import validate        from 'bids-validator';
-import userStore       from '../user/user.store';
 import datasetsActions from '../dashboard/dashboard.datasets.actions';
 import datasetActions  from '../dataset/dataset.actions';
 import favico          from 'favico.js';
