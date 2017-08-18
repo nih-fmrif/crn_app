@@ -9,6 +9,8 @@ import Spinner       from '../common/partials/spinner.jsx';
 import Footer        from '../common/partials/footer.jsx';
 //import Pipelines     from './front-page.pipelines.jsx';
 import FPActions     from './front-page.actions.js';
+import di from '../services/containers';
+const authService = di.auth;
 
 //silence lint errors while allowing somewhat simpler merges with upstream
 //var _ = FrontPageTabs;
@@ -22,7 +24,7 @@ let FrontPage = React.createClass({
 
     statics: {
         willTransitionTo(transition) {
-            if (userStore.data.token) {
+            if (authService.hasToken()) {
                 transition.redirect('dashboard');
             }
         }
@@ -132,22 +134,22 @@ let FrontPage = React.createClass({
                             <h4 className="sr-only">Support for NIDO provided by</h4>
                             <div className="support-more-row">
                                 <div className="support-more-col">
-                                    <a target="_blank" href="https://cmn.nimh.nih.gov/" title="Data Science and Sharing Team">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://cmn.nimh.nih.gov/" title="Data Science and Sharing Team">
                                         <img src="./assets/data-science-and-sharing-team.png" alt="Data Science and Sharing Team"/>
                                     </a>
                                 </div>
                                 <div className="support-more-col">
-                                    <a target="_blank" href="https://www.fmrif.nimh.nih.gov/" title="FMRIF">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.fmrif.nimh.nih.gov/" title="FMRIF">
                                         <img src="./assets/fmrif.png" alt="Functional Magnetic Resonance Facility"/>
                                     </a>
                                 </div>
                                 <div className="support-more-col">
-                                    <a target="_blank" href="https://www.nimh.nih.gov/labs-at-nimh/index.shtml" title="NIH">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.nimh.nih.gov/labs-at-nimh/index.shtml" title="NIH">
                                         <img src="./assets/nih-nimh.png" alt="National Institute of Mental Health"/>
                                     </a>
                                 </div>
                                 <div className="support-more-col dhhs-icon">
-                                    <a target="_blank" href="https://www.hhs.gov/" title="HHS">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.hhs.gov/" title="HHS">
                                         <img src="./assets/dhhs.png" alt="Department of Health and Human Services"/>
                                     </a>
                                 </div>

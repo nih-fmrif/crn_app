@@ -39,6 +39,25 @@ var p = {
     env:        'prod'
 };
 
+const babelrc = {
+    plugins: [
+        ['transform-runtime', {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true,
+            "moduleName": "babel-runtime"
+        }],
+        ['transform-object-rest-spread', {
+            'useBuiltIns': false
+        }]
+    ],
+    presets: ['react', ['env', {
+        targets: {
+            uglify: true
+        }
+    }]]
+};
+
 // primary tasks ----------------------------------------------------------
 
 gulp.task('build', ['styles', 'buildApp'], function() {
@@ -59,7 +78,8 @@ gulp.task('browserSync', function() {
     browserSync.init({
         server: './dist',
         port: 9876,
-        middleware: rewrite()
+        middleware: rewrite(),
+        https: true
     });
 });
 
@@ -82,9 +102,10 @@ gulp.task('copy', function () {
 
 // bundle js
 gulp.task('buildApp', function(cb) {
+    require('dotenv').config();
     process.env.NODE_ENV = 'production';
     browserify(p.jsx)
-        .transform(babelify)
+        .transform(babelify, babelrc)
         .bundle()
         .pipe(source(p.bundle))
         .pipe(buffer())
@@ -116,7 +137,8 @@ gulp.task('styles', function() {
 
 // watch for js changes
 gulp.task('watchApp', function() {
-    var bundler = watchify(browserify(p.jsx, watchify.args));
+    require('dotenv').config();
+    const bundler = watchify(browserify(p.jsx, watchify.args));
     function rebundle() {
         return bundler
             .bundle()
@@ -125,11 +147,16 @@ gulp.task('watchApp', function() {
             .pipe(buffer())
             .pipe(envify(process.env))
             .pipe(buffer())
-            .pipe(uglify())
+            // .pipe(uglify())
             .pipe(gulp.dest(p.dist))
+            .pipe(sourcemaps.write('./', {
+                sourceMappingURL: function (file) {
+                    return '/' + file.relative + '.map';
+                }
+            }))
             .pipe(reload({stream: true}));
     }
-    bundler.transform(babelify).on('update', rebundle);
+    bundler.transform(babelify, babelrc).on('update', rebundle);
     return rebundle();
 });
 

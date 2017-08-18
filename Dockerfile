@@ -1,4 +1,4 @@
-FROM node:4.4.1
+FROM node:6.11
 
 # accept 'branch' build argument
 ARG branch

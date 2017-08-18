@@ -1,4 +1,4 @@
-/*eslint-disable no-unused-vars*/
+/* eslint-disable no-unused-vars, no-global-assign */
 /* global papaya, papayaContainers */
 
 // dependencies -------------------------------------------------------
