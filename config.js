@@ -28,7 +28,7 @@ export default {
         scopes: ['urn:globus:auth:scope:transfer.api.globus.org:all', 'openid', 'profile', 'email', 'offline_access']
 			},
 			google: {
-				clientId: process.env.SCITRAN_AUTH_CLIENT_ID,
+				clientId: process.env.GOOGLE_CLIENT_ID,
 				scopes: 'email,openid'
 			}
 		},
