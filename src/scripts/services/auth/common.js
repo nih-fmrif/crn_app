@@ -176,14 +176,14 @@ export default function(logger) {
    * @returns {string}
    */
   function getStoredAccessToken() {
-    return String(getOauth().access_token);
+    return getOauth().access_token;
   }
 
   /**
    * @returns {string}
    */
   function getStoredRefreshToken() {
-    return String(getOauth().refresh_token);
+    return getOauth().refresh_token;
   }
 
   /**
