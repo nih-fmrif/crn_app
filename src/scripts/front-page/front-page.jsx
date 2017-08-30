@@ -9,6 +9,7 @@ import Spinner       from '../common/partials/spinner.jsx';
 import Footer        from '../common/partials/footer.jsx';
 //import Pipelines     from './front-page.pipelines.jsx';
 import FPActions     from './front-page.actions.js';
+import config        from '../../../config';
 import di from '../services/containers';
 const authService = di.auth;
 
@@ -79,9 +80,8 @@ let FrontPage = React.createClass({
         if (!loadingState) {
             return(
                 <span>
-                    <button className="btn-admin" onClick={userStore.signIn} >
-                        <i className="fa fa-google" /> Sign in with Google
-                    </button>
+                  {config.auth.type === 'google' && <button className="btn-admin" onClick={userStore.signIn} ><i className="fa fa-google" /> Sign in with Google</button>}
+                  {config.auth.type === 'globus' && <button className="btn-admin" onClick={userStore.signIn} ><i className="globus-icon-fp" /> Sign in with Globus</button>}
                 </span>
             );
         }
