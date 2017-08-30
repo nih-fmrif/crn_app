@@ -7,6 +7,7 @@ import Usermenu  from './navbar.usermenu.jsx';
 import UploadBtn from './navbar.upload-button.jsx';
 import userStore from '../user/user.store.js';
 import {Navbar}  from 'react-bootstrap';
+import config    from '../../../config';
 
 // component setup ---------------------------------------------------------------
 
@@ -107,8 +108,9 @@ let BSNavbar = React.createClass({
             return (
                 <div className="navbar-right sign-in-nav-btn">
                     <button className="btn-blue" onClick={userStore.signIn.bind(null, {transition: onFrontPage})} >
-                        <i className="fa fa-google" />
-                        <span> Sign in</span>
+                        {config.auth.type === 'google' && <i className="fa fa-google" />}
+                        {config.auth.type === 'globus' && <i className="globus-icon-navbar" />}
+                        <span className="signin-title"> Sign in</span>
                     </button>
                 </div>
             );

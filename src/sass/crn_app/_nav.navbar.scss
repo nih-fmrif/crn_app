@@ -125,6 +125,26 @@
                 @media(max-width: 767px){
                     margin: 0;
                 }
+
+                button {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .signin-title {
+                    margin-left: 0.3em;
+                }
+
+                .globus-icon-navbar {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    background-image: url(assets/globus-logo.png);
+                    background-size: 20px auto;
+                    background-repeat: no-repeat;
+                    margin-right: 0.3em;
+                }
             }
 
             .user-wrap {

@@ -87,7 +87,18 @@
             border-right: 1px solid #fff;
             padding: 10px;
             margin: -10px;
+
+            &.globus-icon-fp {
+                width: 40px;
+                height: 40px;
+                background-position: center center;
+                background-image: url(assets/globus-logo.png);
+                background-size: 25px auto;
+                background-repeat: no-repeat;
+                margin-right: 0.3em;
+            }
         }
+
     }
 }
 
