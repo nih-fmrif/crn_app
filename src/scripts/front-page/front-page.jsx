@@ -55,7 +55,7 @@ let FrontPage = React.createClass({
                                 </div>
                                 <div className="logo-text">Open<span className="logo-end">Neuro</span></div>
 */}
-                                <h1>NIMH Intraural Data-sharing with OpenNeuro</h1>
+                                <h1>NIMH Intramural Data-sharing with OpenNeuro</h1>
                                 <div className="sign-in-block fade-in">
                                     {this._error(this.state.signinError, this.state.loading)}
                                     {this._signinForm(this.state.loading)}
