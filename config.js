@@ -21,8 +21,15 @@ export default {
 		 * Authentication
 		 */
 		auth: {
+			type: process.env.AUTH_TYPE,
+			globus: {
+        authUri: process.env.CRN_SERVER_URL + '/crn/auth/globus',
+        refreshTokenUri: process.env.CRN_SERVER_URL + '/crn/auth/globus/refresh',
+        scopes: ['urn:globus:auth:scope:transfer.api.globus.org:all', 'openid', 'profile', 'email', 'offline_access']
+			},
 			google: {
-				clientID: process.env.SCITRAN_AUTH_CLIENT_ID
+				clientId: process.env.GOOGLE_CLIENT_ID,
+				scopes: 'email,openid'
 			}
 		},
 

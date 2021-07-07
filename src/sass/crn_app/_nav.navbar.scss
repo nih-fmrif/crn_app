@@ -37,6 +37,7 @@
     z-index: 1300;
     .container{
         padding: 0;
+        border-top: 1px solid #babfc3;
         .navbar-collapse{
             padding: 0;
         }
@@ -106,7 +107,7 @@
                 &:hover {
 
                     .link-name {
-                        border-color: $transparent1-w;
+                        border-color: $nido-blue;
                     }
                  }
 
@@ -120,8 +121,29 @@
 
             .sign-in-nav-btn {
                 margin: 15px 20px;
+                border: 1px solid $white;
                 @media(max-width: 767px){
                     margin: 0;
+                }
+
+                button {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .signin-title {
+                    margin-left: 0.3em;
+                }
+
+                .globus-icon-navbar {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    background-image: url(assets/globus-logo.png);
+                    background-size: 20px auto;
+                    background-repeat: no-repeat;
+                    margin-right: 0.3em;
                 }
             }
 
@@ -146,7 +168,7 @@
                     width: 180px;
                     padding: 0 15px;
                     background: $transparent3;
-                    color: lighten($sky, 10%);
+                    color: $white;
 
                     .link-name {
                         border-color: $transparent;

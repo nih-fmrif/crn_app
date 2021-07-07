@@ -2,3 +2,7 @@ node_modules/
 dist/
 .DS_store
 npm-debug.log
+.idea
+.env
+package-lock.json
+yarn.lock

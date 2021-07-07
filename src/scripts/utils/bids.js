@@ -1,8 +1,9 @@
 import async     from 'async';
 import scitran   from './scitran';
 import crn       from './crn';
-import userStore from '../user/user.store';
 import fileUtils from './files';
+import di        from '../services/containers';
+const authService = di.auth;
 
 /**
  * BIDS
@@ -333,7 +334,7 @@ export default  {
             invalid:    tags.indexOf('invalid')    > -1,
             public:     !!project.public,
             hasPublic:  tags.indexOf('hasPublic')  > -1,
-            shared:     userStore.data.scitran && (project.group != userStore.data.scitran._id)  &&  !!userAccess
+            shared:     authService.getSignedInUserId() && project.group != authService.getSignedInUserId() &&  !!userAccess
         };
         return status;
     },
@@ -346,7 +347,7 @@ export default  {
      */
     userAccess (project) {
         let access = null;
-        const currentUser = userStore.data.scitran ? userStore.data.scitran._id : null;
+        const currentUser = authService.getSignedInUserId() || null;
         if (project) {
             if (project.permissions && project.permissions.length > 0) {
                 for (let user of project.permissions) {
@@ -368,8 +369,10 @@ export default  {
      * whether the current user created the project.
      */
     userCreated (project) {
-        if (!userStore.data.scitran) {return false;}
-        return project.group === userStore.data.scitran._id;
+        if (!authService.getCrnProfile()) {
+            return false;
+        }
+        return project.group === authService.getSignedInUserId();
     },
 
     /**

@@ -19,6 +19,7 @@
         display: block;
         width: 100%;
         background-color: #fff;
+        border-bottom: 2px solid #d8d8d8;
     }
 }
 
@@ -86,7 +87,18 @@
             border-right: 1px solid #fff;
             padding: 10px;
             margin: -10px;
+
+            &.globus-icon-fp {
+                width: 40px;
+                height: 40px;
+                background-position: center center;
+                background-image: url(assets/globus-logo.png);
+                background-size: 25px auto;
+                background-repeat: no-repeat;
+                margin-right: 0.3em;
+            }
         }
+
     }
 }
 
@@ -275,7 +287,7 @@
 .more-info {
     margin: 0;
     padding: 70px 0;
-    @include gradient-vertical($start-color: $e7, $end-color: $white, $start-percent: 0%, $end-percent: 30%);
+    background-color: $white;
     .container{
         max-width: 1500px;
         .bids-more,
@@ -480,10 +492,21 @@
 }
 
 footer {
-    background: #333;
+    background: $c-33;
     padding: 10px 20px;
     color: $white;
     display: block;
+
+    a,
+    a:visited {
+        color: $white;
+    }
+    a:hover,
+    a:focus {
+        color: $white;
+        text-decoration: underline;
+    }
+
     .version{
 
     }
@@ -513,3 +536,31 @@ footer {
 
 
 
+.support-more-row {
+    font-size: 0.1px;
+    text-align: center;
+
+    .support-more-col {
+        display: inline-block;
+        vertical-align: middle;
+
+    }
+    .dhhs-icon a {
+        display: block;
+        max-width: 170px;
+    }
+}
+@supports (display: flex) {
+    .support-more-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        font-size: inherit;
+        text-align: inherit;
+
+        .support-more-col {
+            display: block;
+            margin: auto;
+        }
+    }
+}

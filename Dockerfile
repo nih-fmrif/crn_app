@@ -1,4 +1,4 @@
-FROM node:4.4.1
+FROM node:6.11
 
 # accept 'branch' build argument
 ARG branch
@@ -9,7 +9,6 @@ WORKDIR /srv/crn-app
 # install web app
 ADD . /srv/crn-app
 RUN npm install
-RUN npm install -g gulp-cli
 
-# build app
-CMD gulp build
+# It's required to rebuild before running, because evironment variables can modify compiled code
+CMD npm run start-prod

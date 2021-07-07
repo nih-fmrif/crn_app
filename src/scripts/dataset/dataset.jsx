@@ -14,10 +14,11 @@ import moment       from 'moment';
 import ClickToEdit  from '../common/forms/click-to-edit.jsx';
 import FileTree     from '../common/partials/file-tree.jsx';
 import Jobs         from './dataset.jobs.jsx';
-import userStore    from '../user/user.store.js';
 import Summary      from './dataset.summary.jsx';
 import FileSelect     from '../common/forms/file-select.jsx';
 import uploadActions  from '../upload/upload.actions.js';
+import di           from '../services/containers';
+const authService = di.auth;
 
 let Dataset = React.createClass({
 
@@ -136,7 +137,7 @@ let Dataset = React.createClass({
     },
 
     _leftSidebar(snapshots) {
-        let isSignedIn   = !!userStore.hasToken();
+        let isSignedIn = authService.hasToken();
         let snapshotOptions = snapshots.map((snapshot) => {
 
             if (snapshot.orphaned) {

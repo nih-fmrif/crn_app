@@ -3,13 +3,19 @@
 import React         from 'react';
 import Reflux        from 'reflux';
 import {Link}        from 'react-router';
-import FrontPageTabs from './front-page-tabs.jsx';
+//import FrontPageTabs from './front-page-tabs.jsx';
 import userStore     from '../user/user.store.js';
 import Spinner       from '../common/partials/spinner.jsx';
 import Footer        from '../common/partials/footer.jsx';
-import Pipelines     from './front-page.pipelines.jsx';
+//import Pipelines     from './front-page.pipelines.jsx';
 import FPActions     from './front-page.actions.js';
+import config        from '../../../config';
+import di from '../services/containers';
+const authService = di.auth;
 
+//silence lint errors while allowing somewhat simpler merges with upstream
+//var _ = FrontPageTabs;
+//var _ = Pipelines;
 
 // component setup ----------------------------------------------------
 
@@ -19,7 +25,7 @@ let FrontPage = React.createClass({
 
     statics: {
         willTransitionTo(transition) {
-            if (userStore.data.token) {
+            if (authService.hasToken()) {
                 transition.redirect('dashboard');
             }
         }
@@ -39,6 +45,8 @@ let FrontPage = React.createClass({
                     <div className="container">
                         <div className="intro-inner fade-in clearfix">
                             <div className="clearfix welcome-block">
+                                <img src="./assets/nido.png" alt="NIMH Intramural Data-sharing with OpenNeuro" />
+{/*
                                 <div className="logo-layers">
                                     <img className="logo-layer-users" src="./assets/logo_users.png" alt="OpenNeuro Logo" />
                                     <img className="logo-layer-cube" src="./assets/logo_cube.png" alt="OpenNeuro Logo" />
@@ -46,7 +54,8 @@ let FrontPage = React.createClass({
                                     <img className="logo-layer-data" src="./assets/logo_data.png" alt="OpenNeuro Logo" />
                                 </div>
                                 <div className="logo-text">Open<span className="logo-end">Neuro</span></div>
-                                <h1>A free and open platform for analyzing and sharing neuroimaging data</h1>
+*/}
+                                <h1>NIMH Intramural Data-sharing with OpenNeuro</h1>
                                 <div className="sign-in-block fade-in">
                                     {this._error(this.state.signinError, this.state.loading)}
                                     {this._signinForm(this.state.loading)}
@@ -55,12 +64,11 @@ let FrontPage = React.createClass({
                                 <div className="browse-publicly">
                                     <Link to="publicDashboard"><span>Browse Public Datasets</span></Link>
                                 </div>
+                                This is a U.S. Government computer system, which may be accessed and used only for authorized Government business by authorized personnel. Unauthorized access or use of this computer system may subject violators to criminal, civil, and/or administrative action. All information on this computer system may be intercepted, recorded, read, copied, and disclosed by and to authorized personnel for official purposes, including criminal investigations. Such information includes sensitive data encrypted to comply with confidentiality and privacy requirements. Access or use of this computer system by any person, whether authorized or unauthorized, constitutes consent to these terms. There is no right of privacy in this system.
                             </div>
                         </div>
                     </div>
                 </div>
-                <FrontPageTabs />
-                <Pipelines />
                 {this._moreInfo()}
                 <Footer />
             </span>
@@ -73,9 +81,8 @@ let FrontPage = React.createClass({
         if (!loadingState) {
             return(
                 <span>
-                    <button className="btn-admin" onClick={userStore.signIn} >
-                        <i className="fa fa-google" /> Sign in with Google
-                    </button>
+                  {config.auth.type === 'google' && <button className="btn-admin" onClick={userStore.signIn} ><i className="fa fa-google" /> Sign in with Google</button>}
+                  {config.auth.type === 'globus' && <button className="btn-admin" onClick={userStore.signIn} ><i className="globus-icon-fp" /> Sign in with Globus</button>}
                 </span>
             );
         }
@@ -93,6 +100,7 @@ let FrontPage = React.createClass({
         return (
             <div className="more-info">
                 <div className="container">
+{/*
                     <span className="openneuro-more">
                         <div className="col-xs-12">
                             <div className="logo-text">Open<span className="logo-end">Neuro</span></div>
@@ -122,34 +130,28 @@ let FrontPage = React.createClass({
                             </div>
                         </div>
                     </span>
+*/}
                     <div className="support-more">
-                            <h4>Support for OpenNeuro provided by</h4>
-                            <div className="row">
-                                <div className="col-sm-4">
-                                    <a target="_blank" href="http://www.arnoldfoundation.org/" title="Arnold Foundation">
-                                        <img src="./assets/ljaf.png" alt="Arnold Foundation"/>
+                            <h4 className="sr-only">Support for NIDO provided by</h4>
+                            <div className="support-more-row">
+                                <div className="support-more-col">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://cmn.nimh.nih.gov/" title="Data Science and Sharing Team">
+                                        <img src="./assets/data-science-and-sharing-team.png" alt="Data Science and Sharing Team"/>
                                     </a>
                                 </div>
-                                <div className="col-sm-4">
-                                    <a target="_blank" href="https://www.nsf.gov/" title="NSF">
-                                        <img src="./assets/nsf.png" alt="National Science Foundation"/>
+                                <div className="support-more-col">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.fmrif.nimh.nih.gov/" title="FMRIF">
+                                        <img src="./assets/fmrif.png" alt="Functional Magnetic Resonance Facility"/>
                                     </a>
                                 </div>
-                                <div className="col-sm-4">
-                                    <a target="_blank" href="https://www.nih.gov/" title="NIH">
-                                        <img src="./assets/nih.png" alt="National Institute on Drug and Abuse"/>
+                                <div className="support-more-col">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.nimh.nih.gov/labs-at-nimh/index.shtml" title="NIH">
+                                        <img src="./assets/nih-nimh.png" alt="National Institute of Mental Health"/>
                                     </a>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-offset-3 col-sm-3">
-                                    <a target="_blank" href="https://www.stanford.edu/" title="Stanford">
-                                        <img src="./assets/stanford.png" alt="Stanford"/>
-                                    </a>
-                                </div>
-                                <div className="col-sm-3">
-                                    <a target="_blank" href="https://squishymedia.com/" title="Squishymedia">
-                                        <img src="./assets/squishymedia.png" alt="Squishymedia"/>
+                                <div className="support-more-col dhhs-icon">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.hhs.gov/" title="HHS">
+                                        <img src="./assets/dhhs.png" alt="Department of Health and Human Services"/>
                                     </a>
                                 </div>
                             </div>

@@ -7,7 +7,6 @@ import scitran     from '../utils/scitran';
 import crn         from '../utils/crn';
 import bids        from '../utils/bids';
 import router      from '../utils/router-container';
-import userStore   from '../user/user.store';
 import uploadStore from '../upload/upload.store';
 import userActions from '../user/user.actions';
 import upload      from '../utils/upload';
@@ -15,7 +14,8 @@ import config      from '../../../config';
 import files       from '../utils/files';
 import request     from '../utils/request';
 import moment      from 'moment';
-import FPActions   from '../front-page/front-page.actions.js';
+import di          from '../services/containers';
+const authService = di.auth;
 
 let datasetStore = Reflux.createStore({
 
@@ -25,7 +25,7 @@ let datasetStore = Reflux.createStore({
 
     init: function () {
         this.setInitialState();
-        this.loadApps();
+        //this.loadApps();
         this.listenTo(uploadStore, (data) => {
             if (data.projectId !== this.data.currentUploadId) {
                 this.update({currentUploadId: data.projectId});
@@ -108,7 +108,7 @@ let datasetStore = Reflux.createStore({
         let snapshot     = !!(options && options.snapshot),
             dataset      = this.data.dataset;
         options          = options ? options : {};
-        options.isPublic = !userStore.data.token;
+        options.isPublic = !authService.hasToken();
 
         // set active job if passed in query param
         if (options) {
@@ -207,20 +207,21 @@ let datasetStore = Reflux.createStore({
      * Load Apps
      */
     loadApps() {
-        this.update({loadingApps: true});
-        crn.getApps((err, res) => {
-            if (res.body) {
-                res.body.sort((a, b) => {
-                    let aName = a.label.toUpperCase();
-                    let bName = b.label.toUpperCase();
-                    return (aName < bName) ? -1 : (aName > bName) ? 1 : 0;
-                });
-                FPActions.setApps(res.body);
-                this.update({apps: res.body, loadingApps: false});
-            } else {
-                setTimeout(this.loadApps, 5000);
-            }
-        });
+        return false;
+        // this.update({loadingApps: true});
+        // crn.getApps((err, res) => {
+        //     if (res.body) {
+        //         res.body.sort((a, b) => {
+        //             let aName = a.label.toUpperCase();
+        //             let bName = b.label.toUpperCase();
+        //             return (aName < bName) ? -1 : (aName > bName) ? 1 : 0;
+        //         });
+        //         FPActions.setApps(res.body);
+        //         this.update({apps: res.body, loadingApps: false});
+        //     } else {
+        //         setTimeout(this.loadApps, 5000);
+        //     }
+        // });
     },
 
     /**
@@ -332,7 +333,7 @@ let datasetStore = Reflux.createStore({
 
         // reload app is missing for job modals
         if (name === 'jobs' && (!this.data.apps || this.data.apps.length === 0)) {
-            this.loadApps();
+            //this.loadApps();
         }
 
         if (name === 'displayFile') {
@@ -989,7 +990,7 @@ let datasetStore = Reflux.createStore({
             executionSystem:   app.executionSystem,
             parameters:        parameters,
             snapshotId:        snapshotId,
-            userId:            userStore.data.scitran._id,
+            userId:            authService.getSignedInUserId(),
             batchQueue:        app.defaultQueue,
             memoryPerNode:     app.defaultMemoryPerNode,
             nodeCount:         app.defaultNodeCount,

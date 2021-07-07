@@ -3,8 +3,9 @@
 import Reflux    from 'reflux';
 import Actions   from './dashboard.datasets.actions.js';
 import bids      from '../utils/bids';
-import userStore from '../user/user.store.js';
 import dashUtils from './dashboard.utils.js';
+import di        from '../services/containers';
+const authService = di.auth;
 
 // store setup -----------------------------------------------------------------------
 
@@ -73,7 +74,7 @@ let UploadStore = Reflux.createStore({
      */
     getDatasets(isPublic) {
         if (isPublic === undefined) {isPublic = this.data.isPublic;}
-        let isSignedOut = !userStore.data.token;
+        let isSignedOut = !authService.hasToken();
         this.update({
             loading: true,
             sort: {

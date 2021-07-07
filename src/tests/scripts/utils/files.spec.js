@@ -1,4 +1,3 @@
-import assert from 'assert';
 import files  from '../../../scripts/utils/files';
 
 describe('utils/files.js', () => {
@@ -134,7 +133,7 @@ describe('utils/files.js', () => {
 // tests -----------------------------------------------------------------------------------------
 
     it('should generate a tree structure from a selection of files', () => {
-        assert.deepEqual(files.generateTree(fileList), fileTree);
+        expect(files.generateTree(fileList)).toEqual(fileTree);
     });
 
     it('should return the tree element with the corresponding id', () => {
@@ -159,7 +158,7 @@ describe('utils/files.js', () => {
                 }
             ]
         };
-        assert.deepEqual(elem,  mockElem);
+        expect(elem).toEqual(mockElem);
     });
 
 });

@@ -6,7 +6,7 @@ import moment         from 'moment';
 import actions        from './dataset.actions.js';
 import WarnButton     from '../common/forms/warn-button.jsx';
 import uploadStore    from '../upload/upload.store';
-import userStore      from '../user/user.store.js';
+//import userStore      from '../user/user.store.js';
 import datasetActions from './dataset.actions.js';
 import ToolModals     from './dataset.tools.modals.jsx';
 
@@ -37,7 +37,7 @@ let Tools = React.createClass({
         let isAdmin      = dataset.access === 'admin',
             // isEditor     = dataset.access === 'rw',
             // isViewer     = dataset.access === 'ro',
-            isSignedIn   = !!userStore.hasToken(),
+            // isSignedIn   = !!userStore.hasToken(),
             isPublic     = !!dataset.status.public,
             isIncomplete = !!dataset.status.incomplete,
             isInvalid    = !!dataset.status.invalid,
@@ -100,13 +100,14 @@ let Tools = React.createClass({
                         type: 'Error'
                     }
                 ]
-            },
+/*            },
             {
                 tooltip: 'Run Anaylsis',
                 icon: 'fa-area-chart icon-plus',
                 action: datasetActions.toggleModal.bind(null, 'jobs'),
                 display: isSignedIn && !isIncomplete,
                 warn: false
+*/
             }
         ];
 

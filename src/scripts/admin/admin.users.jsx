@@ -2,13 +2,14 @@
 
 import React      from 'react';
 import Reflux     from 'reflux';
-import userStore  from '../user/user.store';
 import Input      from '../common/forms/input.jsx';
 import Spinner    from '../common/partials/spinner.jsx';
 import adminStore from './admin.store';
 import actions    from './admin.actions';
 import WarnButton from '../common/forms/warn-button.jsx';
 import moment     from 'moment';
+import di         from '../services/containers';
+const authService = di.auth;
 
 let users = React.createClass({
 
@@ -106,7 +107,7 @@ let users = React.createClass({
     _userTools(user) {
         let adminIcon = user.root ? 'fa-check-square-o' : 'fa-square-o';
 
-        if (user._id !== userStore.data.scitran._id) {
+        if (user._id !== authService.getSignedInUserId()) {
             return (
                 <div className="col-xs-4 last dataset-tools-wrap-admin">
                     <div className="tools clearfix">
